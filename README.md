@@ -1,27 +1,64 @@
-# BwmCli
+# Angular2 Material Dashboard Pro
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+Material-design Dashboard
 
-## Development server
+## How to run it
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**- please ensure you have installed angular cli, otherwise `npm install -g @angular/cli`**
 
-## Code scaffolding
+1. git clone https://github.com/wangdicoder/angular-material-dashboard
+2. cd angular-material-dashboard
+3. npm install
+4. ng serve -o (it will automatically open localhost:4200)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Further Plan
+- [x] Add Wizard Component
+- [ ] Responsive Sidebar
+- [ ] Consolidate form elements, like switch
 
-## Build
+## Screenshot
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Dashboard
 
-## Running unit tests
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/dashboard.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Login
 
-## Running end-to-end tests
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/login.png)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Register
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/register.png)
 
-## Further help
+### Lock
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/lock.png)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### User Profile
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/profile.png)
+
+### Sweet Alert
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/sweetalert.gif)
+
+### Notification
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/notification.gif)
+
+### Settings
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/settings.gif)
+
+### Table
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/table.png)
+
+### Price
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/price.png)
+
+### Panels
+![](https://github.com/wangdicoder/angular2-material-dashboard-pro/raw/master/screenshot/panel.png)
+
+## Acknowledge 
+
+- [Creative Tim](https://github.com/creativetimofficial)
+- [Sweet Alert 2](https://github.com/limonte/sweetalert2)
+- [Bootstrap Notify](http://bootstrap-notify.remabledesigns.com)
+
+## License
+
+MIT
