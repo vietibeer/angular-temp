@@ -1,0 +1,8 @@
+<app-navbar [title]="title"></app-navbar>
+<div class="row" style="margin-top: 10px">
+    
+    <div class="col-md-4 col-sm-12 col-xs-12" *ngFor="let rental of rentalData">
+        <app-imagecard [image]="rental.image" [title]="rental.title" [desc]="rental.desc"
+            [footerTitle]="rental.footerTitle" [position]="rental.position" [id]="rental.id"></app-imagecard>
+    </div>
+</div>

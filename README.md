@@ -13,8 +13,8 @@ Material-design Dashboard
 
 ## Further Plan
 - [x] Add Wizard Component
-- [ ] Responsive Sidebar
-- [ ] Consolidate form elements, like switch
+- [x] Responsive Sidebar
+- [x] Consolidate form elements, like switch
 
 ## Screenshot
 
