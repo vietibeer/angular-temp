@@ -8,7 +8,7 @@
         <ul class="nav">
             <li *ngFor="let menuItem of menuItems" routerLinkActive #rla="routerLinkActive"
                 [ngClass]="rla.isActive || menuItem.id == childPath ? (menuItem.children === null? 'active' : '') : ''"
-                [routerLinkActiveOptions]="{exact: true}" [id]="menuItem.id">
+                [routerLinkActiveOptions]="{exact: true}" [id]="menuItem.children === null ? menuItem.id : ''">
 
                 <a [style.display]="menuItem.children === null? 'flex' : 'none'" [routerLink]="[menuItem.path]"
                     [style.background-color]="rla.isActive || menuItem.id == childPath ? color : 'transparent'"
@@ -32,7 +32,7 @@
 
                     </a>
 
-                    <div id="component" class="collapse" [id]="[menuItem.id]">
+                    <div class="collapse" [id]="[menuItem.id]">
 
                         <ul class="nav">
 

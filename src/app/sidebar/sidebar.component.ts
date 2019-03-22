@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { SettingsService } from '../services/settings.service';
 import { ROUTES, ROUTES_CHILD_NO_SIDEBAR } from './sidebar-routes.config';
-import { Router, ChildActivationStart } from "@angular/router";
+import { Router, ChildActivationStart, ActivatedRouteSnapshot, ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-sidebar',
@@ -17,7 +17,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
     public childPath: string = '';
     constructor(
         public settingsService: SettingsService,
-        public router: Router
+        public router: Router,
+        public activatedRoute: ActivatedRoute
     ) {
         this.menuItems = ROUTES;
         this.activeFontColor = 'rgba(0,0,0,.6)';

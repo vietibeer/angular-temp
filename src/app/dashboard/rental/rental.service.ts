@@ -7,18 +7,33 @@ import { Rental } from 'app/models/rental';
 })
 export class RentalService {
 
+    urlDataRental = './assets/data/mock-rental.json';
     constructor(
         private httpClient: HttpClient
     ) { }
 
     getRental(): Observable<Rental[]> {
-        return new Observable(obs => {
-            this.httpClient.get<Rental[]>('./assets/data/mock-rental.json').subscribe((data: any) => {
+        return new Observable<Rental[]>(obs => {
+            this.httpClient.get(this.urlDataRental).subscribe((data: any) => {
                 obs.next(data.rental);
                 obs.complete();
             }, err => {
-                obs.error([]);
+                obs.error(err);
             });
         });
+    }
+
+    getRentalById(id): Observable<Rental> {
+        return new Observable<Rental>(obs => {
+            this.httpClient.get(this.urlDataRental).subscribe((data: any) => {
+
+                const rental: Rental = data.rental.find(res => res.id == id);
+                obs.next(new Rental(rental));
+                obs.complete();
+                
+            }, err => {
+                obs.error(err);
+            })
+        })
     }
 }

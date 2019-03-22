@@ -8,7 +8,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "s": "ng serve --live-reload='false' -o"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +26,8 @@
     "@angular/router": "~7.0.0",
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
-    "rxjs": "~6.3.3",
+    "rxjs": "^6.4.0",
+    "rxjs-compat": "^6.4.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
