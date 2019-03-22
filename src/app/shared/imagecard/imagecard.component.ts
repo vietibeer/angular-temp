@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {Router} from "@angular/router"
+
 
 @Component({
   selector: 'app-imagecard',
@@ -7,13 +9,19 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ImagecardComponent implements OnInit {
   @Input() title: string;
+  @Input() id: string;
   @Input() desc: string;
   @Input() footerTitle: string;
   @Input() position: string;
   @Input() image: string;
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
+  goDetail(id) {
+    this.router.navigate(['/dashboard/rental/detail', id]);
+  }
 }
