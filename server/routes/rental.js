@@ -10,7 +10,8 @@ router.get('', (req, res) => {
 });
 
 router.get('/:rentalId', (req, res) => {
-    Rental.findById(req.params.rentalId, '-image').exec((err, foundRentals) => {
+    // Rental.findById(req.params.rentalId, '-shared').exec((err, foundRentals) => {
+    Rental.findById(req.params.rentalId).exec((err, foundRentals) => {
         if (err) return handleError(res, 422, 'Rental Error', 'Could not find rental!');
         res.json(foundRentals);
     });

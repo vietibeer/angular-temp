@@ -27,10 +27,8 @@ import { RentalService } from './dashboard/rental/rental.service';
 import { RentalModule } from './dashboard/rental/rental.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { RentalComponent } from './dashboard/rental/rental.component';
-import { RentalListComponent } from './dashboard/rental/rental-list/rental-list.component';
-import { RentalDetailComponent } from './dashboard/rental/rental-detail/rental-detail.component';
-import { RentalListItemComponent } from './dashboard/rental/rental-list-item/rental-list-item.component';
+import { AgmCoreModule } from '@agm/core';
+import { MapService } from './shared/map/map.service';
 
 @NgModule({
   declarations: [
@@ -49,15 +47,14 @@ import { RentalListItemComponent } from './dashboard/rental/rental-list-item/ren
     PriceTableComponent,
     PanelsComponent,
     WizardComponent,
-    // RentalComponent,
-    // RentalListComponent,
-    // RentalDetailComponent,
-    // RentalListItemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyATLS4ZyVWO6Ozozk2GjcwHPLkk-mpJuGM'
+    }),
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled'
     }),
@@ -66,10 +63,12 @@ import { RentalListItemComponent } from './dashboard/rental/rental-list-item/ren
     HttpModule,
     RentalModule,
     SharedModule,
+    
   ],
   providers: [
     SettingsService,
-    RentalService
+    RentalService,
+    MapService
   ],
   bootstrap: [AppComponent]
 })
