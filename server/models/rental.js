@@ -8,9 +8,11 @@ const rentalSchema = new Schema({
     footerTitle: { type: String, required: true },
     position: { type: String, required: true, max: [50, 'Too long, max is 50 characters'] },
     shared: Boolean,
-    category: { type: String, required: true, min: 2, max: 20},
+    bedrooms: Number,
+    category: { type: String, required: true, min: 2, max: 20 },
     dailyRate: Number,
-    createAt: { type: Date, default: Date.now }
+    createAt: { type: Date, default: Date.now },
+    user: { type: Schema.Types.ObjectId, ref: "User" }
 });
 
 const rental = mongoose.model('Rental', rentalSchema);
