@@ -3,11 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RentalService } from '../rental.service';
 import { Rental } from 'app/models/rental';
 import { switchMap } from "rxjs/operators";
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-rental-detail',
     templateUrl: './rental-detail.component.html',
-    styleUrls: ['./rental-detail.component.css']
+    styleUrls: ['./rental-detail.component.scss']
 })
 export class RentalDetailComponent implements OnInit {
     rental_id: string;
@@ -20,7 +21,7 @@ export class RentalDetailComponent implements OnInit {
     ) {
         this.activatedRoute.paramMap.pipe(
             switchMap(param => {
-                return param.get("id");
+                return of(param.get("id"));
             })
         ).subscribe(id => {
             this.getRentalDetail(id);
