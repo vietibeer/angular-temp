@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
     username: {
@@ -26,6 +27,24 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Rental'
     }]
+});
+
+userSchema.methods.isSamePassword = async function (passwordConfirm) {
+    const match = await bcrypt.compare(passwordConfirm, this.password);
+    return match;
+}
+
+userSchema.pre('save', function (next) {
+
+    const user = this;
+    const saltRounds = 10;
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(user.password, salt, function (err, hash) {
+            user.password = hash;
+            next();
+        });
+    });
+
 });
 
 const user = mongoose.model('User', userSchema);
