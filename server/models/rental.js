@@ -15,5 +15,11 @@ const rentalSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User" }
 });
 
+rentalSchema.virtual('id').get(function () {
+    return this._id.toHexString();
+});
+
+rentalSchema.set('toJSON', { virtuals: true });
+
 const rental = mongoose.model('Rental', rentalSchema);
 module.exports = rental;

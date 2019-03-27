@@ -11,10 +11,10 @@ exports.auth = (req, res) => {
     User.findOne({ email }, (err, user) => {
         if (err) return res.status(422).send({ errors: handleError() });
 
-        if (user) return res.status(422).send({ errors: [{ title: 'User Error', detail: "Email don\'t exist!" }] });
+        if (!user) return res.status(422).send({ errors: [{ title: 'User Error', detail: "Email don\'t exist!" }] });
 
-        if (user.isSamePassword(password)) {
-
+        const isMatch = user.isSamePassword(password);
+        if (isMatch) {
             const userToken = jwt.sign({
                 userId: user.id,
                 username: user.username

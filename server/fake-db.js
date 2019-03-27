@@ -1,4 +1,5 @@
 const Rental = require('./models/rental');
+const User = require('./models/user');
 
 class FakeDB {
 
@@ -11,6 +12,7 @@ class FakeDB {
                 "footerTitle": "$899/night",
                 "position": "Barcelona, Spain",
                 "dailyRate": 32,
+                "bedrooms": 5,
                 "shared": true,
                 "category": "apartment"
             },
@@ -21,6 +23,7 @@ class FakeDB {
                 "footerTitle": "$1,119/night",
                 "position": "London, UK",
                 "dailyRate": 72,
+                "bedrooms": 8,
                 "shared": true,
                 "category": "condo"
             },
@@ -31,25 +34,40 @@ class FakeDB {
                 "footerTitle": "$1221/night",
                 "position": "London, UK",
                 "dailyRate": 42,
+                "bedrooms": 2,
                 "shared": false,
                 "category": "house"
             }
-        ]
+        ];
+
+        this.users = [{
+            username: "Viet",
+            email: "viet@yopmail.com",
+            password: "123456"
+        }];
     }
 
     async cleanRental() {
         await Rental.deleteMany();
+        await User.deleteMany();
     }
 
     storeRental() {
+        const user = new User(this.users[0]);
+
         this.rentals.forEach(rental => {
-            const newRental = new Rental(rental)
+            const newRental = new Rental(rental);
+            newRental.user = user;
+
+            user.rentals.push(newRental);
             newRental.save();
-        })
+        });
+
+        user.save();
     }
 
-    seedDb() {
-        this.cleanRental();
+    async seedDb() {
+        await this.cleanRental();
         this.storeRental();
     }
 }

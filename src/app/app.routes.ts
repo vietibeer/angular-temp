@@ -20,7 +20,8 @@ import { RentalListComponent } from './dashboard/rental/rental-list/rental-list.
 import { RentalDetailComponent } from './dashboard/rental/rental-detail/rental-detail.component';
 
 export const routes: Routes = [
-    { path: '', component: LoginComponent },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: 'login', component: LoginComponent },
     { path: 'lock', component: LockComponent },
     { path: 'register', component: RegisterComponent },
     {

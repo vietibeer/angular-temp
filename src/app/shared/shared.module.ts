@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 //components
 import { FigurecardComponent } from './figurecard/figurecard.component';
 import { FooterComponent } from './footer/footer.component';
@@ -28,6 +28,7 @@ import { CamelizePipe } from "ngx-pipes";  //If you want to use pipe's transform
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         MatButtonModule,
         MatRadioModule,
@@ -61,6 +62,7 @@ import { CamelizePipe } from "ngx-pipes";  //If you want to use pipe's transform
         // module
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         MatButtonModule,
         MatRadioModule,
