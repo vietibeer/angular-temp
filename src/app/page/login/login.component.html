@@ -15,7 +15,7 @@
                             <button mat-icon-button><i class="fa fa-google-plus"></i></button>
                         </div>
                     </div>
-                    <p class="tip" *ngIf="success">Register {{success}}</p>
+                    <p class="tip" *ngIf="notifySucess">{{notifySucess}}</p>
 
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="card-form">
                         <div class="form-row">

@@ -29,3 +29,6 @@ app.listen(PORT, () => {
 
 // NOTE: Relationship 1-N
 // User can have multiple rentals. Rental can have just one User.
+
+//NOTE: Schema
+// Do not use arrow function with Schema

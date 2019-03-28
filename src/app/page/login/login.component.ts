@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HelperService } from 'app/services/helper.service';
 import { AuthService } from 'app/services/auth.service';
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
     set f(loginForm) { loginForm.controls };
     get f() { return this.loginForm.controls };
-    success: any;
+    notifySucess: any;
     loginForm: FormGroup;
     submitted: boolean = false;
 
@@ -22,8 +22,13 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private helperS: HelperService,
         private authS: AuthService,
+        private router: Router
     ) {
-        this.success = this.route.snapshot.params.register;
+        this.route.params.subscribe(params => {
+            if (Object.keys(params).length > 0 && params.register == 'success') {
+                this.notifySucess = 'You have been successfully registered, you can login now!'
+            }
+        });
     }
 
     ngOnInit() {
@@ -44,8 +49,8 @@ export class LoginComponent implements OnInit {
             return;
         }
 
-        this.authS.login(this.loginForm.value).subscribe(token => {
-            console.log(token);
+        this.authS.login(this.loginForm.value).subscribe(() => {
+            this.router.navigate(['/dashboard/rental']);
         }, err => {
             console.log(err);
         })
