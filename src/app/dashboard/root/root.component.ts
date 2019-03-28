@@ -24,7 +24,7 @@ export class RootComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.settingService.sidebarImageIndexUpdate.unsubscribe();
-    this.settingService.sidebarColorUpdate.unsubscribe();
+    // this.settingService.sidebarImageIndexUpdate.unsubscribe();
+    // this.settingService.sidebarColorUpdate.unsubscribe();
   }
 }

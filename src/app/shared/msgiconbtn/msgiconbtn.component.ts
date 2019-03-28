@@ -6,8 +6,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./msgiconbtn.component.css']
 })
 export class MsgIconBtnComponent implements OnInit {
-  @Input() number: string;
+  @Input() number: number;
   @Input() icon: string;
+  @Input() username: string;
   constructor() { }
 
   ngOnInit() {

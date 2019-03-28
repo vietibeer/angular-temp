@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { routes } from './app.routes';
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 // components
 import { AppComponent } from './app.component';
@@ -36,6 +37,10 @@ import { HelperService } from './services/helper.service';
 import { SettingsService } from './services/settings.service';
 import { RentalService } from './dashboard/rental/rental.service';
 import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
+
+// interceptor
+import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
 
 @NgModule({
   declarations: [
@@ -77,7 +82,13 @@ import { AuthService } from './services/auth.service';
     RentalService,
     MapService,
     HelperService,
-    AuthService
+    AuthService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpConfigInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

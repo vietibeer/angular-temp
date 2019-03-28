@@ -1,4 +1,7 @@
-<button mat-icon-button class="msg-btn">
-  <span>{{ number }}</span>
-  <i class="material-icons icon-btn">{{ icon }}</i>
-</button>
+<div>
+    <strong style="padding-left: 15px;">{{username}}</strong>
+    <button mat-icon-button style="bottom: 4px;" [ngClass]="number > 0 ? 'msg-btn' : ''">
+        <span *ngIf="number > 0">{{ number }}</span>
+        <i class="material-icons icon-btn">{{ icon }}</i>
+    </button>
+</div>

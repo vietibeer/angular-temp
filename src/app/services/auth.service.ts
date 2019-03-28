@@ -5,12 +5,19 @@ import * as CONFIG from "../models/config";
 import * as jwt from "jsonwebtoken";
 import * as moment from "moment";
 
+export class DecodedToken {
+    exp: number = 0;
+    username: string = '';
+}
+
 @Injectable()
 export class AuthService {
     private decodedToken;
     constructor(
         private http: HttpClient
-    ) { }
+    ) {
+        this.decodedToken = JSON.parse(localStorage.getItem('user_data')) || new DecodedToken();
+     }
 
     register(data): Observable<any> {
 
@@ -39,14 +46,28 @@ export class AuthService {
         });
     }
 
+    logout() {
+        localStorage.removeItem('user_token');
+        localStorage.removeItem('user_data');
+        this.decodedToken = new DecodedToken();
+    }
+
     private saveToken(token: string): string {
         this.decodedToken = jwt.verify(token, CONFIG.SECRET_JWT);
         localStorage.setItem('user_token', token);
-        localStorage.setItem('user', JSON.stringify(this.decodedToken));
+        localStorage.setItem('user_data', JSON.stringify(this.decodedToken));
         return token;
     }
 
     isAuthenticated(): boolean {
-        return moment().isBefore(moment.unix(this.decodedToken.exp));
+        return moment().isBefore(moment.unix(this.decodedToken.exp)); // moment('2010-10-20 10:05:00').isBefore('2010-10-20 11:00:00'); return true. What mean not expired
+    }
+
+    getUserToken() {
+        return localStorage.getItem('user_token');
+    }
+
+    getUserName() {
+        return this.decodedToken.username;
     }
 }
