@@ -40,7 +40,7 @@ userSchema.virtual('id').get(function () {
 userSchema.set('toJSON', { virtuals: true });
 
 userSchema.methods.isSamePassword = async function (passwordConfirm) {
-    const match = await bcrypt.compare(passwordConfirm, this.password);
+    const match = await bcrypt.compare(String(passwordConfirm), this.password);
     return match;
 }
 

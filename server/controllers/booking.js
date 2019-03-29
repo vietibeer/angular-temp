@@ -30,8 +30,7 @@ exports.createBooking = (req, res) => {
                 booking.save((err) => {
                     if (err) return res.status(422).send({ errors: handleError(err.errors) });
 
-                    // User.update({ _id: user.id }, { $push: { bookings: booking } });
-                    User.findOneAndUpdate({ id: user.id }, { $push: { bookings: booking } });
+                    User.update({ _id: user.id }, { $push: { bookings: booking } }, function () { });
 
                     rental.save();
                     res.json({ "startAt": booking.startAt, "endAt": booking.endAt });
