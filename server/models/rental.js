@@ -12,7 +12,11 @@ const rentalSchema = new Schema({
     category: { type: String, required: true, min: 2, max: 20 },
     dailyRate: Number,
     createAt: { type: Date, default: Date.now },
-    user: { type: Schema.Types.ObjectId, ref: "User" }
+    user: { type: Schema.Types.ObjectId, ref: "User" },
+    bookings: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Booking'
+    }]
 });
 
 rentalSchema.virtual('id').get(function () {

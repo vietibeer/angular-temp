@@ -40,20 +40,28 @@ class FakeDB {
             }
         ];
 
-        this.users = [{
-            username: "Viet",
-            email: "viet@yopmail.com",
-            password: "123456"
-        }];
+        this.users = [
+            {
+                username: "Viet",
+                email: "viet@gmail.com",
+                password: "123456"
+            },
+            {
+                username: "Viet1",
+                email: "viet1@gmail.com",
+                password: "123456"
+            },
+        ];
     }
 
     async cleanRental() {
-        await Rental.deleteMany();
-        await User.deleteMany();
+        await Rental.deleteMany({});
+        await User.deleteMany({});
     }
 
     storeRental() {
         const user = new User(this.users[0]);
+        const user2 = new User(this.users[1]);
 
         this.rentals.forEach(rental => {
             const newRental = new Rental(rental);
@@ -64,6 +72,7 @@ class FakeDB {
         });
 
         user.save();
+        user2.save();
     }
 
     async seedDb() {
