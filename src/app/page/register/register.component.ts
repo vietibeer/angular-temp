@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit {
 
     submitted: boolean = false;
     registerForm: FormGroup;
+    errors: any[] = [];
+
     constructor(
         private formBuilder: FormBuilder,
         private helperS: HelperService,
@@ -40,7 +42,7 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
+        this.errors = [];
         if (this.registerForm.invalid) {
             return;
         }
@@ -48,9 +50,8 @@ export class RegisterComponent implements OnInit {
         this.authS.register(this.registerForm.value).subscribe(res => {
             this.router.navigate(['/login', res]);
         }, err => {
-            console.log(err);
+            this.errors = err.error.errors;
         })
-
         
     }
 

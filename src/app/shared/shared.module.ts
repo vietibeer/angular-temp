@@ -1,7 +1,11 @@
+// modules core
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule, MatRadioModule, MatInputModule, MatMenuModule, MatCheckboxModule } from '@angular/material';
+
 //components
 import { FigurecardComponent } from './figurecard/figurecard.component';
 import { FooterComponent } from './footer/footer.component';
@@ -12,11 +16,11 @@ import { MsgIconBtnComponent } from './msgiconbtn/msgiconbtn.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MapComponent } from './map/map.component';
 
-//module
-import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatRadioModule, MatInputModule, MatMenuModule, MatCheckboxModule } from '@angular/material';
+// modules
 import { NgPipesModule } from 'ngx-pipes';
 import { AgmCoreModule } from '@agm/core';
+import { Daterangepicker } from 'ng2-daterangepicker';
+
 // import { CustomerComponent } from './customer.component';
 // import { NewItemDirective } from './new-item.directive';
 // import { OrdersPipe } from './orders.pipe';
@@ -36,7 +40,8 @@ import { CamelizePipe } from "ngx-pipes";  //If you want to use pipe's transform
         MatMenuModule,
         MatCheckboxModule,
         AgmCoreModule,
-        NgPipesModule
+        NgPipesModule,
+        Daterangepicker
     ],
     declarations: [
         FigurecardComponent,
@@ -70,7 +75,8 @@ import { CamelizePipe } from "ngx-pipes";  //If you want to use pipe's transform
         MatMenuModule,
         MatCheckboxModule,
         NgPipesModule,
-        AgmCoreModule
+        AgmCoreModule,
+        Daterangepicker
     ],
     providers: [CamelizePipe]
 })

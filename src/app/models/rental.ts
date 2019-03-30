@@ -1,3 +1,5 @@
+import { Booking } from "./booking";
+
 export class Rental {
     id: string;
     image: string;
@@ -9,7 +11,10 @@ export class Rental {
     bedrooms: number;
     shared?: boolean;
     category: string;
+    bookings: Booking[];
+
     constructor(rental) {
+
         this.id = rental.id;
         this.image = rental.image;
         this.title = rental.title;
@@ -20,5 +25,7 @@ export class Rental {
         this.shared =  rental.shared;
         this.bedrooms =  rental.bedrooms;
         this.category = rental.category;
+        this.bookings = rental.bookings;
+        
     }
 }

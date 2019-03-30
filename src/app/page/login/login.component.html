@@ -21,13 +21,13 @@
                         <div class="form-row">
                             <i class="material-icons">email</i>
                             <mat-form-field color="accent">
-                                <input type="text" matInput placeholder="Email address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+                                <input type="text" matInput placeholder="Email address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                             </mat-form-field>
                         </div>
                         <div class="form-row">
                             <i class="material-icons">lock_outline</i>
                             <mat-form-field color="accent">
-                                <input type="password" matInput placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                                <input type="password" matInput placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                             </mat-form-field>
                         </div>
 
@@ -35,7 +35,13 @@
                             <button mat-button type="submit">LET'S GO</button>
                         </div>
                     </form>
-                    
+
+                    <div *ngIf="errors.length > 0" class="alert alert-danger">
+                        <p [style.color]="'#fff'" *ngFor="let error of errors">
+                            {{error.detail}}
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </div>

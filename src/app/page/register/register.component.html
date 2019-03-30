@@ -16,8 +16,8 @@
                                 </div>
                                 <div class="desc">
                                     <h4>Marking</h4>
-                                    <p>We've created the marketing campaign of the website. It was a very interesting
-                                        collaboration.</p>
+                                    <p>We've created the marketing campaign of the website. It was a very interesting collaboration.
+                                    </p>
                                 </div>
                             </div>
                             <div class="feature">
@@ -26,8 +26,7 @@
                                 </div>
                                 <div class="desc">
                                     <h4>Fully Coded in HTML5</h4>
-                                    <p>We've developed the website with HTML5 and CSS3. The client has access to the
-                                        code using GitHub.</p>
+                                    <p>We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.</p>
                                 </div>
                             </div>
                             <div class="feature">
@@ -94,7 +93,7 @@
                                 <div class="row">
                                     <mat-checkbox [required]="true" style="margin-left: 2px" formControlName="termAndCondition">
                                         <p style="margin-left: 8px">
-                                            I agree to the 
+                                            I agree to the
                                             <span [ngClass]="{ 'is-invalid': submitted && f.termAndCondition.errors }" style="color: #9c27b0; cursor: pointer; font-weight: 400;">terms and conditions</span>.
                                         </p>
                                     </mat-checkbox>
@@ -108,6 +107,13 @@
                                 </div>
 
                             </form>
+
+                            <div *ngIf="errors.length > 0" class="alert alert-danger" style="margin-top: 15px;">
+                                <p [style.color]="'#fff'" *ngFor="let error of errors">
+                                    {{error.detail}}
+                                </p>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -10,12 +10,13 @@ import { AuthService } from 'app/services/auth.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+    
     set f(loginForm) { loginForm.controls };
     get f() { return this.loginForm.controls };
     notifySucess: any;
     loginForm: FormGroup;
     submitted: boolean = false;
+    errors: any[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
+        this.errors = [];
         if (this.loginForm.invalid) {
             return;
         }
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit {
         this.authS.login(this.loginForm.value).subscribe(() => {
             this.router.navigate(['/dashboard/rental']);
         }, err => {
-            console.log(err);
+            this.errors = err.error.errors;
         })
 
     }
