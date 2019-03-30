@@ -8,12 +8,12 @@ exports.auth = (req, res) => {
 
     if (!email || !password) return res.status(422).send({ errors: [{ title: 'User Error', detail: "Username or Email don\'t empty" }] });
 
-    User.findOne({ email }, (err, user) => {
+    User.findOne({ email }, async(err, user) => {
         if (err) return res.status(422).send({ errors: handleError() });
 
         if (!user) return res.status(422).send({ errors: [{ title: 'User Error', detail: "Email don\'t exist!" }] });
 
-        const isMatch = user.isSamePassword(password);
+        const isMatch = await user.isSamePassword(password);
         if (isMatch) {
             const userToken = jwt.sign({
                 userId: user.id,
@@ -37,7 +37,7 @@ exports.register = (req, res) => {
     User.findOne({ email: email }, (err, existedEmail) => {
 
         if (err) return res.status(422).send({ errors: handleError(err.errors) });
-        if (existedEmail) return res.status(422).send({ errors: [{ title: 'User Error', detail: "Email don\'t exist!" }] });
+        if (existedEmail) return res.status(422).send({ errors: [{ title: 'User Error', detail: "Email already existed" }] });
 
         const user = new User({ email, username, password });
         user.save((err) => {

@@ -10,7 +10,13 @@ const bookingSchema = new Schema({
     rental: { type: Schema.Types.ObjectId, ref: "Rental" },
     user: { type: Schema.Types.ObjectId, ref: "User" },
     createdAt: { type: Date, default: Date.now },
-})
+});
+
+bookingSchema.virtual('id').get(function () {
+    return this._id.toHexString();
+});
+
+bookingSchema.set('toJSON', { virtuals: true });
 
 const booking = mongoose.model('Booking', bookingSchema);
 

@@ -13,7 +13,7 @@ exports.createBooking = (req, res) => {
     const booking = new Booking({ startAt, endAt, totalPrice, guests, days });
 
     Rental.findById(rental.id)
-        .populate('booking')
+        .populate('bookings')
         .populate('user').exec((err, rental) => {
 
             if (err) return res.status(422).send({ errors: handleError(err.errors) });
@@ -30,7 +30,7 @@ exports.createBooking = (req, res) => {
                 booking.save((err) => {
                     if (err) return res.status(422).send({ errors: handleError(err.errors) });
 
-                    User.update({ _id: user.id }, { $push: { bookings: booking } }, function () { });
+                    User.update({ _id: user.id }, { $push: { bookings: booking } }, function() {});
 
                     rental.save();
                     res.json({ "startAt": booking.startAt, "endAt": booking.endAt });
