@@ -7,6 +7,7 @@ const rentalSchema = new Schema({
     desc: { type: String, required: true },
     footerTitle: { type: String, required: true },
     position: { type: String, required: true, max: [50, 'Too long, max is 50 characters'] },
+    city: { type: String, required: true, max: [50, 'Too long, max is 50 characters'] },
     shared: Boolean,
     bedrooms: Number,
     category: { type: String, required: true, min: 2, max: 20 },
@@ -19,7 +20,7 @@ const rentalSchema = new Schema({
     }]
 });
 
-rentalSchema.virtual('id').get(function () {
+rentalSchema.virtual('id').get(function() {
     return this._id.toHexString();
 });
 
