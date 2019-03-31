@@ -1,0 +1,89 @@
+<div class="container">
+    <app-navbar title="Create Rental"></app-navbar>
+    <div class="row">
+        <div class="col-md-6">
+            <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="card-form" style="margin-left: 20px;">
+
+                <div class="row">
+                    <mat-form-field color="accent" color="accent">
+                        <input matInput formControlName="title" placeholder="Title">
+                    </mat-form-field>
+                </div>
+
+                <div class="row form-group">
+                    <label for="file">Choose File</label>
+                    <input type="file" id="file" (change)="handleUploadImage($event.target.files)">
+                </div>
+
+                <div class="row">
+                    <mat-form-field color="accent">
+                        <input matInput formControlName="footerTitle" placeholder="Footer Title">
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <mat-form-field color="accent">
+                        <input matInput formControlName="position" placeholder="Position">
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <mat-form-field color="accent">
+                        <input matInput formControlName="city" placeholder="City">
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <mat-form-field color="accent">
+                        <input matInput formControlName="bedrooms" placeholder="Bedrooms">
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <mat-form-field color="accent">
+                        <input matInput formControlName="dailyRate" placeholder="Daily Rate" type="number" class="example-right-align">
+                        <span matPrefix>$&nbsp;</span>
+                        <span matSuffix>.00</span>
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <mat-form-field color="accent">
+                        <mat-select placeholder="Category" formControlName="category">
+                            <mat-option *ngFor="let o of rentalCategories" [value]="o">{{o | ucwords}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <mat-form-field color="accent">
+                        <textarea matInput placeholder="Description" formControlName="desc"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <mat-checkbox formControlName="shared">
+                        <span>Shared</span>
+                    </mat-checkbox>
+                </div>
+
+                <div class="row" style="display: flex; justify-content: center">
+                    <button mat-raised-button class="btn btn-primary btn-round" [ngStyle]="{cursor: !createForm.valid ? 'no-drop' : 'pointer'}" [disabled]="!createForm.valid">Create Rental</button>
+                </div>
+            </form>
+
+            <div *ngIf="errors.length > 0" class="alert alert-danger">
+                <p *ngFor="let error of errors">
+                    {{error.detail}}
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 ml-auto">
+            <div class="image-container">
+                <h5 class="catchphrase">Hundreds of awesome places in reach of few clicks.</h5>
+            </div>
+        </div>
+    </div>
+
+</div>

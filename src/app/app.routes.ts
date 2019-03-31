@@ -19,7 +19,7 @@ import { RentalComponent } from './dashboard/rental/rental.component';
 import { RentalListComponent } from './dashboard/rental/rental-list/rental-list.component';
 import { RentalDetailComponent } from './dashboard/rental/rental-detail/rental-detail.component';
 import { RentalSearchResultComponent } from './dashboard/rental/rental-search-result/rental-search-result.component';
-
+import { RentalCreateComponent } from './dashboard/rental/rental-create/rental-create.component';
 
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
@@ -48,7 +48,8 @@ export const routes: Routes = [
                     { path: '', component: RentalListComponent },
                     { path: 'detail/:id', component: RentalDetailComponent },
                     { path: 'detail/:id', component: RentalDetailComponent },
-                    { path: ':position/homes', component: RentalSearchResultComponent }
+                    { path: ':position/homes', component: RentalSearchResultComponent },
+                    { path: 'new', component: RentalCreateComponent },
                 ]
             }
         ]

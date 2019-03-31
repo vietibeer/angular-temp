@@ -12,6 +12,7 @@ import { RentalSearchResultComponent } from './rental-search-result/rental-searc
 //services
 import { RentalService } from './rental.service';
 import { SharedModule } from 'app/shared/shared.module';
+import { RentalCreateComponent } from './rental-create/rental-create.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { SharedModule } from 'app/shared/shared.module';
         RentalDetailComponent,
         RentalBookingComponent,
         RentalSearchResultComponent,
+        RentalCreateComponent,
     ],
     imports: [
         CommonModule,

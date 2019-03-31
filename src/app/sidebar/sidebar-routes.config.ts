@@ -17,4 +17,5 @@ export const ROUTES = [
 
 export const ROUTES_CHILD_NO_SIDEBAR = [
     'rental/detail/:id',
-]
+    'rental/new',
+];

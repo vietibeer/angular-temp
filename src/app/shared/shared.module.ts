@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatRadioModule, MatInputModule, MatMenuModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule, MatRadioModule, MatInputModule, MatMenuModule, MatCheckboxModule, MatSelectModule } from '@angular/material';
 
 //components
 import { FigurecardComponent } from './figurecard/figurecard.component';
@@ -39,6 +39,7 @@ import { CamelizePipe } from "ngx-pipes";  //If you want to use pipe's transform
         MatInputModule,
         MatMenuModule,
         MatCheckboxModule,
+        MatSelectModule,
         AgmCoreModule,
         NgPipesModule,
         Daterangepicker
@@ -74,6 +75,7 @@ import { CamelizePipe } from "ngx-pipes";  //If you want to use pipe's transform
         MatInputModule,
         MatMenuModule,
         MatCheckboxModule,
+        MatSelectModule,
         NgPipesModule,
         AgmCoreModule,
         Daterangepicker

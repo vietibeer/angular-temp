@@ -80,7 +80,7 @@ export class RentalService {
 
         return new Observable(obs => {
             this.httpClient.post(url, rental).subscribe((rental: any) => {
-                obs.next();
+                obs.next(rental);
                 obs.complete();
             }, err => {
                 obs.error(err);

@@ -4,7 +4,7 @@ export class Rental {
 
     static readonly CATEGORIES = ['house', 'apartment', 'condo'];
 
-    id: string;
+    id?: string;
     image: string;
     title: string;
     desc: string;
@@ -13,9 +13,9 @@ export class Rental {
     city: string;
     dailyRate: number;
     bedrooms: number;
-    shared?: boolean;
+    shared: boolean;
     category: string;
-    bookings: Booking[];
+    bookings?: Booking[];
 
     constructor(rental) {
 
