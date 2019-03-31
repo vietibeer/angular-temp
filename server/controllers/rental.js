@@ -27,9 +27,8 @@ const getRentalById = (req, res) => {
 const getRentalByCity = (req, res) => {
 
     const position = req.query.position;
-    const query = position ? { position: position.toLowerCase(), city: position.toLowerCase() } : {};
-
-    Rental.find(query).select('-bookings').exec((err, foundRentals) => {
+    const query = position ? { position: position.toLowerCase() } : {};
+    Rental.find(query).select('-bookings').exec(function(err, foundRentals) {
 
         if (err) {
             return res.status(422).send({ errors: handleError(err.errors) });
