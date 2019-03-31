@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
     @Input() title: string;
+    search: string = '';
     constructor(
         private authS: AuthService,
         private router: Router
@@ -24,5 +25,9 @@ export class NavbarComponent implements OnInit {
     logout() {
         this.authS.logout();
         this.router.navigate(['/login']);
+    }
+
+    redirectSearchResult() {
+        this.router.navigate([`/dashboard/rental/${this.search}/homes`]);
     }
 }

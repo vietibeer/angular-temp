@@ -18,14 +18,18 @@ import { RegisterComponent } from './page/register/register.component';
 import { RentalComponent } from './dashboard/rental/rental.component';
 import { RentalListComponent } from './dashboard/rental/rental-list/rental-list.component';
 import { RentalDetailComponent } from './dashboard/rental/rental-detail/rental-detail.component';
+import { RentalSearchResultComponent } from './dashboard/rental/rental-search-result/rental-search-result.component';
+
+
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-    { path: 'lock', component: LockComponent, canActivate: [AuthGuard]},
-    { path: 'dashboard', component: RootComponent, canActivate: [AuthGuard], children: [
+    { path: 'lock', component: LockComponent, canActivate: [AuthGuard] },
+    {
+        path: 'dashboard', component: RootComponent, canActivate: [AuthGuard], children: [
             { path: '', component: HomeComponent },
             { path: 'profile', component: ProfileComponent },
             { path: 'table', component: TableComponent },
@@ -43,6 +47,8 @@ export const routes: Routes = [
                 path: 'rental', component: RentalComponent, children: [
                     { path: '', component: RentalListComponent },
                     { path: 'detail/:id', component: RentalDetailComponent },
+                    { path: 'detail/:id', component: RentalDetailComponent },
+                    { path: ':position/homes', component: RentalSearchResultComponent }
                 ]
             }
         ]
