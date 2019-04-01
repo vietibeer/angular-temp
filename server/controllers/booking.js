@@ -6,7 +6,12 @@ const User = require('../models/user');
 const { handleError } = require('./common');
 const moment = require('moment');
 
-exports.createBooking = (req, res) => {
+/**
+ * Function create booking
+ * @param {any} req 
+ * @param {any} res 
+ */
+const createBooking = (req, res) => {
     const { startAt, endAt, totalPrice, guests, days, rental } = req.body;
 
     const user = res.locals.user; // user is authorization
@@ -30,7 +35,7 @@ exports.createBooking = (req, res) => {
                 booking.save((err) => {
                     if (err) return res.status(422).send({ errors: handleError(err.errors) });
 
-                    User.update({ _id: user.id }, { $push: { bookings: booking } }, function() {});
+                    User.update({ _id: user.id }, { $push: { bookings: booking } }, function () { });
 
                     rental.save();
                     res.json({ "startAt": booking.startAt, "endAt": booking.endAt });
@@ -45,6 +50,28 @@ exports.createBooking = (req, res) => {
         })
 }
 
+/**
+ * Function get user bookings
+ * @param {any} req 
+ * @param {any} res 
+ */
+const getUserBookings = (req, res) => {
+    const user = res.locals.user;
+    Booking.find({ user })
+        .populate('rental')
+        .exec((err, booking) => {
+
+            if (err) return res.status(422).send({ errors: handleError(err.errors) });
+
+            return res.json(booking);
+        })
+};
+
+/**
+ * Function check is valid booking
+ * @param {Booking} booking 
+ * @param {Rental} rental 
+ */
 function isValidBooking(booking, rental) {
     let isValid = true;
 
@@ -65,4 +92,9 @@ function isValidBooking(booking, rental) {
     }
 
     return isValid;
+}
+
+module.exports = {
+    createBooking: createBooking,
+    getUserBookings: getUserBookings
 }

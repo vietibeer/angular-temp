@@ -8,14 +8,14 @@ const User = require('../models/user');
  * @param {any} res 
  */
 const getRentalById = (req, res) => {
-    Rental.findById(req.params.rentalId)
+    Rental.findById(req.params.id)
         .populate({ path: 'bookings', select: 'startAt endAt' })
         .populate({ path: 'user', select: 'username' })
-        .exec((err, foundRentals) => {
+        .exec((err, foundRental) => {
 
-            if (err) return res.status(422).send({ errors: handleError(err.errors) });
+            if (err || !foundRental) return res.status(422).send({ errors: handleError(err.errors) });
 
-            res.json(foundRentals);
+            res.json(foundRental);
         });
 };
 
@@ -28,7 +28,7 @@ const getRentalByCity = (req, res) => {
 
     const position = req.query.position;
     const query = position ? { position: position.toLowerCase() } : {};
-    Rental.find(query).select('-bookings').exec(function(err, foundRentals) {
+    Rental.find(query).select('-bookings').exec(function (err, foundRentals) {
 
         if (err) {
             return res.status(422).send({ errors: handleError(err.errors) });
@@ -59,21 +59,79 @@ const createRental = (req, res) => {
     Rental.create(rental, (err, newRental) => {
 
         if (err) {
-            return res.status(422).send({ errors: normalizeErrors(err.errors) });
+            return res.status(422).send({ errors: handleError(err.errors) });
         }
 
         // push newRantal id to user.rentals array 
-        User.update({ _id: user.id }, { $push: { rentals: newRental } }, function() {});
+        User.update({ _id: user.id }, { $push: { rentals: newRental } }, function () { });
 
         return res.json(newRental);
 
     })
 
-
 };
+
+/**
+ * Function update user
+ * @param {any} req 
+ * @param {any} res 
+ */
+const updateRental = (req, res) => {
+    const dataRentalUpdate = req.body;
+    const user = res.locals.user;
+
+    Rental.findById(req.params.id)
+        .populate('user')
+        .exec((err, rental) => {
+
+            if (err) return res.status(422).send({ errors: handleError(err.errors) });
+
+            if (rental.user.id !== user.id) return res.status(422).send({ errors: [{ title: 'Invalid User!', detail: `You are not rental owner!` }] });
+
+            rental.set(dataRentalUpdate);
+            rental.save((err) => {
+                if (err) return res.status(422).send({ errors: handleError(err.errors) });
+                return res.status(200).send(rental);
+            });
+        });
+};
+
+/**
+ * Function delete rental
+ * @param {any} req 
+ * @param {any} res 
+ */
+const deleteRental = (req, res) => {
+    const user = res.locals.user;
+
+    Rental.findById(req.params.id)
+        .populate('user', 'id')
+        .populate({
+            path: 'bookings',
+            select: 'startAt',
+            match: { startAt: { $gt: new Date() } } //$gt => greater than
+        })
+        .exec((err, rental) => {
+            if (err) return res.status(422).send({ errors: handleError(err.errors) });
+
+            if (rental.user.id !== user.id) return res.status(422).send({ errors: [{ title: 'Invalid User!', detail: `You are not rental owner!` }] });
+
+            if (rental.bookings.length > 0) return res.status(422).send({ errors: [{ title: 'Active Bookings!', detail: `Cannot delete rental with active bookings!` }] });
+
+            rental.remove((err) => {
+                if (err) return res.status(422).send({ errors: handleError(err.errors) });
+
+                User.update({ _id: user.id }, { $pull: { rentals: rental.id } }, () => { })
+
+                return res.json({'status': 'deleted'});
+            })
+        });
+}
 
 module.exports = {
     getRentalById: getRentalById,
     getRentalByCity: getRentalByCity,
     createRental: createRental,
+    updateRental: updateRental,
+    deleteRental: deleteRental,
 }
