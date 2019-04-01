@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Rental } from 'app/models/rental';
 import * as CONFIG from "../../models/config";
 import { Booking } from 'app/models/booking';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -91,13 +92,13 @@ export class RentalService {
     /**
      * Function get user rentals
      */
-    getUserRentals(): Observable<any> {
+    getUserRentals(): Observable<Rental[]> {
 
         const url = `${CONFIG.BASE_URL}/rentals/manage`;
 
-        return new Observable(obs => {
+        return new Observable<Rental[]>(obs => {
             this.httpClient.get(url).subscribe((rental: any) => {
-                obs.next();
+                obs.next(rental);
                 obs.complete();
 
             }, err => {
@@ -116,7 +117,7 @@ export class RentalService {
 
         return new Observable(obs => {
             this.httpClient.delete(url).subscribe((rental: any) => {
-                obs.next();
+                obs.next(rental);
                 obs.complete();
 
             }, err => {
@@ -181,5 +182,20 @@ export class RentalService {
         })
     }
 
+    /**
+     * Function get user bookings
+     */
+    getUserBookings(): Observable<Booking[]> {
+
+        const url = `${CONFIG.BASE_URL}/bookings/manage`;
+
+        return new Observable(obs => {
+            this.httpClient.get(url).subscribe((booking: Booking[]) => {
+                obs.next(booking);
+            }, err => {
+                obs.error(err);
+            })
+        })
+    }
 
 }

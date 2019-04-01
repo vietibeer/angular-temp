@@ -27,6 +27,7 @@ import { WizardComponent } from './dashboard/component/wizard/wizard.component';
 
 // modules
 import { RentalModule } from './dashboard/rental/rental.module';
+import { ManageModule } from './dashboard/manage/manage.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
@@ -38,6 +39,7 @@ import { SettingsService } from './services/settings.service';
 import { RentalService } from './dashboard/rental/rental.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ManageService } from './dashboard/manage/manage.service';
 
 // interceptor
 import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
@@ -74,12 +76,13 @@ import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
     HttpClientModule,
     HttpModule,
     RentalModule,
+    ManageModule,
     SharedModule,
-    
   ],
   providers: [
     SettingsService,
     RentalService,
+    ManageService,
     MapService,
     HelperService,
     AuthService,

@@ -16,6 +16,7 @@ export class Rental {
     shared: boolean;
     category: string;
     bookings?: Booking[];
+    createdAt?: string;
 
     constructor(rental) {
 
@@ -31,6 +32,7 @@ export class Rental {
         this.bedrooms =  rental.bedrooms;
         this.category = rental.category;
         this.bookings = rental.bookings;
+        this.createdAt = rental.createdAt;
         
     }
 }
