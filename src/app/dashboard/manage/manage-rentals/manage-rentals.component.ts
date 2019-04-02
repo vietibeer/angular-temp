@@ -4,6 +4,7 @@ import { Rental } from 'app/models/rental';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { ManageRentalBookingComponent } from './manage-rental-booking/manage-rental-booking.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-manage-rentals',
@@ -16,7 +17,8 @@ export class ManageRentalsComponent implements OnInit {
     rentalDeleteIndex: number;
     constructor(
         private rentalService: RentalService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -65,6 +67,10 @@ export class ManageRentalsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
         });
+    }
+
+    goEditRental(id) {
+        this.router.navigateByUrl(`/dashboard/rental/${id}/edit`);
     }
 
 }

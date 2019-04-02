@@ -15,28 +15,30 @@
                     <div class="card text-center">
 
                         <div class="card-block">
-                            <h4 class="card-title">{{rental.title}} - {{rental.city | ucwords}}</h4>
+                            <h4 class="card-title" style="margin-bottom: 15px;">{{rental.title}} -
+                                {{rental.city | ucwords}}</h4>
 
-                            <a class="btn btn-ghost" [routerLink]="['/dashboard/rental/detail/', rental.id]">Go to
+                            <a class="btn btn-primary" [routerLink]="['/dashboard/rental/detail/', rental.id]">Go to
                                 Rental</a>
 
                             <span *ngIf="rental.bookings.length > 0">
-                                <button class="btn btn-ghost" (click)="showPopup(rental.bookings)">Show Bookings</button>
+                                <button class="btn btn-info" (click)="showPopup(rental.bookings)">Show Bookings</button>
                             </span>
 
                         </div>
 
-                        <div class="card-footer text-muted">
+                        <div style="background-color: #e0e0e0;" class="card-footer text-muted">
 
                             <p>Created at {{rental.createdAt | formatDate}}</p>
 
-                            <button (click)="rentalDeleteIndex = i" *ngIf="rentalDeleteIndex !== i" type="button"
-                                class="btn btn-bwm btn-delete">Delete</button>
+                            <div class="btn-manage-action">
+                                <button (click)="rentalDeleteIndex = i" *ngIf="rentalDeleteIndex !== i" type="button"
+                                    class="btn btn-primary">Delete</button>
 
-                            <a class="btn btn-warning btn-edit"
-                                [routerLink]="['/dashboard/rental/:id/edit', rental.id]">Edit</a>
+                                <a class="btn btn-warning" (click)="goEditRental(rental.id)">Edit</a>
+                            </div>
 
-                            <div *ngIf="rentalDeleteIndex === i">
+                            <div style="height: 50px;" *ngIf="rentalDeleteIndex === i">
                                 <p class="confirm-message">Do you confirm delete?</p>
                                 <button (click)="deleteRental(rental.id)" class="btn btn-success">Yes</button>
                                 <button (click)="rentalDeleteIndex = undefined" class="btn btn-danger">No</button>
@@ -52,7 +54,7 @@
                 <div class="alert alert-warning">
                     You dont have any rentals currenty created. If you want advertised your property
                     please follow this link.
-                    <a class="btn btn-bwm" [routerLink]="['dashboard/rental/new']">Register Rental</a>
+                    <a class="btn btn-info" [routerLink]="['dashboard/rental/new']">Register Rental</a>
                 </div>
             </div>
 
