@@ -3,6 +3,23 @@ const Rental = require('../models/rental');
 const User = require('../models/user');
 
 /**
+ * Function get user rentals
+ * @param {any} req 
+ * @param {any} res 
+ */
+const getUserRentals = (req, res) => {
+    const user = res.locals.user;
+
+    Rental.where({ user })
+        .populate('bookings').exec((err, foundRental) => {
+
+            if (err) return res.status(422).send({ errors: handleError(err.errors) });
+
+            res.json(foundRental);
+        });
+};
+
+/**
  * Function get rental by id
  * @param {any} req 
  * @param {any} res 
@@ -30,13 +47,9 @@ const getRentalByCity = (req, res) => {
     const query = position ? { position: position.toLowerCase() } : {};
     Rental.find(query).select('-bookings').exec(function (err, foundRentals) {
 
-        if (err) {
-            return res.status(422).send({ errors: handleError(err.errors) });
-        }
+        if (err) return res.status(422).send({ errors: handleError(err.errors) });
 
-        if (position && foundRentals.length === 0) {
-            return res.status(422).send({ errors: [{ title: 'No Rentals Found!', detail: `There are no rentals for city ${position}` }] });
-        }
+        if (position && foundRentals.length === 0) return res.status(422).send({ errors: [{ title: 'No Rentals Found!', detail: `There are no rentals for city ${position}` }] });
 
         res.json(foundRentals);
     });
@@ -58,9 +71,7 @@ const createRental = (req, res) => {
 
     Rental.create(rental, (err, newRental) => {
 
-        if (err) {
-            return res.status(422).send({ errors: handleError(err.errors) });
-        }
+        if (err) return res.status(422).send({ errors: handleError(err.errors) });
 
         // push newRantal id to user.rentals array 
         User.update({ _id: user.id }, { $push: { rentals: newRental } }, function () { });
@@ -123,12 +134,13 @@ const deleteRental = (req, res) => {
 
                 User.update({ _id: user.id }, { $pull: { rentals: rental.id } }, () => { })
 
-                return res.json({'status': 'deleted'});
+                return res.json({ 'status': 'deleted' });
             })
         });
 }
 
 module.exports = {
+    getUserRentals: getUserRentals,
     getRentalById: getRentalById,
     getRentalByCity: getRentalByCity,
     createRental: createRental,

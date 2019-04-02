@@ -4,7 +4,9 @@ const UserController = require('../controllers/user');
 const RentalController = require('../controllers/rental');
 
 router.get('', UserController.authMiddleware, RentalController.getRentalByCity);
+router.get('/manage', UserController.authMiddleware, RentalController.getUserRentals);
 router.get('/:id', UserController.authMiddleware, RentalController.getRentalById);
+
 router.post('', UserController.authMiddleware, RentalController.createRental);
 router.patch('/:id', UserController.authMiddleware, RentalController.updateRental);
 router.delete('/:id', UserController.authMiddleware, RentalController.deleteRental);
