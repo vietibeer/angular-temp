@@ -6,6 +6,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
 import { ManageRentalsComponent } from './manage-rentals/manage-rentals.component';
 import { ManageComponent } from './manage.component';
+import { ManageRentalBookingComponent } from './manage-rentals/manage-rental-booking/manage-rental-booking.component';
 
 //services
 import { ManageService } from './manage.service';
@@ -14,7 +15,8 @@ import { ManageService } from './manage.service';
     declarations: [
         ManageBookingsComponent,
         ManageRentalsComponent,
-        ManageComponent
+        ManageComponent,
+        ManageRentalBookingComponent,
     ],
     imports: [
         CommonModule,
@@ -22,6 +24,9 @@ import { ManageService } from './manage.service';
     ],
     providers: [
         ManageService
+    ],
+    entryComponents: [
+        ManageRentalBookingComponent
     ]
 })
 

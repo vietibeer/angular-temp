@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RentalService } from 'app/dashboard/rental/rental.service';
 import { Rental } from 'app/models/rental';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
+import { ManageRentalBookingComponent } from './manage-rental-booking/manage-rental-booking.component';
 
 @Component({
     selector: 'app-manage-rentals',
@@ -11,9 +13,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ManageRentalsComponent implements OnInit {
 
     rentals: Rental[] = [];
-    rentalDeleteIndex: number = 0;
+    rentalDeleteIndex: number;
     constructor(
-        private rentalService: RentalService
+        private rentalService: RentalService,
+        private dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -47,6 +50,21 @@ export class ManageRentalsComponent implements OnInit {
             (errorResponse: HttpErrorResponse) => {
                 // this.toastr.error(errorResponse.error.errors[0].detail, 'Failed!');
             })
+    }
+
+    /**
+     * Function show popup rental bookings
+     * @param {Booking[]} bookings 
+     */
+    showPopup(bookings) {
+        const dialogRef = this.dialog.open(ManageRentalBookingComponent, {
+            width: '550px',
+            data: { bookings: bookings }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+        });
     }
 
 }

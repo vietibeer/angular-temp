@@ -50,6 +50,7 @@ export const routes: Routes = [
                 path: 'rental', component: RentalComponent, children: [
                     { path: '', component: RentalListComponent },
                     { path: 'detail/:id', component: RentalDetailComponent },
+                    { path: ':id/edit', component: RentalDetailComponent },
                     { path: ':position/homes', component: RentalSearchResultComponent },
                     { path: 'new', component: RentalCreateComponent },
                 ]

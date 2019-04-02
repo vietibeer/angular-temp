@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatRadioModule, MatInputModule, MatMenuModule, MatCheckboxModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatRadioModule, MatInputModule, MatMenuModule, MatCheckboxModule, MatSelectModule, MatIconModule, MatToolbarModule, MatDividerModule, MatDialogModule } from '@angular/material';
 
 //components
 import { FigurecardComponent } from './figurecard/figurecard.component';
@@ -37,6 +37,10 @@ import { FormatDatePipe } from 'app/pipes/format-date.pipe';
         MatMenuModule,
         MatCheckboxModule,
         MatSelectModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatDividerModule,
+        MatDialogModule,
         AgmCoreModule,
         NgPipesModule,
         Daterangepicker
@@ -74,6 +78,10 @@ import { FormatDatePipe } from 'app/pipes/format-date.pipe';
         MatMenuModule,
         MatCheckboxModule,
         MatSelectModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatDividerModule,
+        MatDialogModule,
         NgPipesModule,
         AgmCoreModule,
         Daterangepicker,
