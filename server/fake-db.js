@@ -25,7 +25,7 @@ class FakeDB {
 
         this.rentals.forEach(rental => {
             const newRental = new Rental(rental);
-            newRental.user = user;
+            newRental.user = user; // add owner of rental user
 
             user.rentals.push(newRental);
             newRental.save();

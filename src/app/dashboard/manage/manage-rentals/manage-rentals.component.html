@@ -8,18 +8,16 @@
             <span class="example-fill-remaining-space"></span>
         </mat-toolbar>
 
-        <div class="row">
+        <div class="row" [ngClass]="{row: rentals && rentals.length > 0}">
 
             <ng-container *ngIf="rentals && rentals.length > 0">
                 <div *ngFor="let rental of rentals; let i = index" class="col-md-4">
                     <div class="card text-center">
 
                         <div class="card-block">
-                            <h4 class="card-title" style="margin-bottom: 15px;">{{rental.title}} -
-                                {{rental.city | ucwords}}</h4>
+                            <h4 class="card-title" style="margin-bottom: 15px;">{{rental.title}} - {{rental.city | ucwords}}</h4>
 
-                            <a class="btn btn-primary" [routerLink]="['/dashboard/rental/detail/', rental.id]">Go to
-                                Rental</a>
+                            <a class="btn btn-primary" [routerLink]="['/dashboard/rental/detail/', rental.id]">Go to Rental</a>
 
                             <span *ngIf="rental.bookings.length > 0">
                                 <button class="btn btn-info" (click)="showPopup(rental.bookings)">Show Bookings</button>
@@ -32,8 +30,7 @@
                             <p>Created at {{rental.createdAt | formatDate}}</p>
 
                             <div class="btn-manage-action">
-                                <button (click)="rentalDeleteIndex = i" *ngIf="rentalDeleteIndex !== i" type="button"
-                                    class="btn btn-primary">Delete</button>
+                                <button (click)="rentalDeleteIndex = i" *ngIf="rentalDeleteIndex !== i" type="button" class="btn btn-primary">Delete</button>
 
                                 <a class="btn btn-warning" (click)="goEditRental(rental.id)">Edit</a>
                             </div>
@@ -52,8 +49,7 @@
 
             <div *ngIf="rentals && rentals.length === 0" class="col-md-8">
                 <div class="alert alert-warning">
-                    You dont have any rentals currenty created. If you want advertised your property
-                    please follow this link.
+                    You dont have any rentals currenty created. If you want advertised your property please follow this link.
                     <a class="btn btn-info" [routerLink]="['dashboard/rental/new']">Register Rental</a>
                 </div>
             </div>

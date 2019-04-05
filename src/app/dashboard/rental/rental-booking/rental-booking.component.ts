@@ -5,6 +5,8 @@ import { HelperService } from 'app/services/helper.service';
 import * as moment from "moment";
 import { Rental } from 'app/models/rental';
 import { RentalService } from '../rental.service';
+import { MatDialog } from '@angular/material';
+import { PaymentComponent } from 'app/dashboard/payment/payment.component';
 
 declare var swal;
 
@@ -26,7 +28,8 @@ export class RentalBookingComponent implements OnInit {
     constructor(
         private auth: AuthService,
         private helpS: HelperService,
-        private rentalS: RentalService
+        private rentalS: RentalService,
+        private dialog: MatDialog
     ) {
         this.newBooking = new Booking();
         this.options = {
@@ -55,7 +58,7 @@ export class RentalBookingComponent implements OnInit {
     }
 
     checkInvalidDates(date) {
-        // dates inside array bookedOutDates is invailid, because that dates did booked. 
+        // dates inside array bookedOutDates is invalid, because that dates did booked. 
         // date.diff(moment(), 'days') < 0  // date booking must be before today
         return this.bookedOutDates.includes(date.format(Booking.DATE_FORMAT)) || date.diff(moment(), 'days') < 0;
     }
@@ -88,7 +91,7 @@ export class RentalBookingComponent implements OnInit {
         swal({
             title: 'Confirm Booking',
             text: `${this.newBooking.startAt} to ${this.newBooking.endAt}`,
-            html: `<p><b>${this.newBooking.days}</b> nights / <b>${this.rental.dailyRate}</b> per Night</p>
+            html: `<p><b>${this.newBooking.days}</b> nights / <b>${this.rental.dailyRate}</b>$ per Night</p>
                    <p>Guests: <b>${this.newBooking.guests}</b></p>
                    <p>Price: <b>${this.newBooking.totalPrice}$</b></p><hr>
                    <p>Do you confirm booking for selected days?</p>`,
@@ -97,7 +100,7 @@ export class RentalBookingComponent implements OnInit {
             cancelButtonClass: 'btn btn-danger',
             confirmButtonText: 'YES!'
         }).then(function () {
-            self.createBooking(self.newBooking);
+            self.showPopupPayment();
         });
 
     }
@@ -163,6 +166,23 @@ export class RentalBookingComponent implements OnInit {
             this.rental = rental;
             this.changeRental.emit(this.rental);
             this.getBookingOutDates();
+        });
+    }
+
+    /**
+     * Function show popup payment
+     */
+    showPopupPayment() {
+        const dialogRef = this.dialog.open(PaymentComponent, {
+            width: '550px',
+            data: { booking: this.newBooking }
+        });
+
+        dialogRef.afterClosed().subscribe(token => {
+            if (token) {
+                this.newBooking.paymentToken = token;
+                this.createBooking(this.newBooking);
+            }
         });
     }
 }

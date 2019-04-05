@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const rentalRouters = require('./routes/rental');
 const userRouters = require('./routes/user');
 const bookingRouters = require('./routes/booking');
+const paymentRoutes = require('./routes/payment');
 
 mongoose.connect(config.DB_URI, { useNewUrlParser: true }).then(() => {
     const fakedb = new FakeDb();
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/rentals', rentalRouters);
 app.use('/api/v1/user', userRouters);
 app.use('/api/v1/bookings', bookingRouters);
+app.use('/api/v1/payments', paymentRoutes);
 
 app.listen(PORT, () => {
     console.log(`port ${PORT} running`);
