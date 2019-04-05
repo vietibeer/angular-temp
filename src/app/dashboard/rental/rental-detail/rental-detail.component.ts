@@ -34,4 +34,8 @@ export class RentalDetailComponent implements OnInit {
     getRentalDetail(id) {
         this.rentalService.getRentalById(id).subscribe(data => this.rental = data);
     }
+
+    changeRentalBooking(event: Rental) {
+        this.rental = event;
+    }
 }

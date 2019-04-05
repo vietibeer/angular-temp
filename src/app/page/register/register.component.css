@@ -1,4 +1,4 @@
-.container{
+.container {
   height: 100%;
   position: relative;
   z-index: 1;
@@ -9,47 +9,47 @@
   background-size: cover;
 }
 
-.register-panel{
+.register-panel {
   margin-top: 25px;
 }
 
-.card{
+.card {
   padding: 40px 0 30px;
 }
 
-.card h2{
+.card h2 {
   text-align: center;
 }
 
-.feature{
+.feature {
   display: flex;
   /*width: 100%;*/
   flex: 1;
   margin-top: 50px;
 }
 
-.feature .icon{
+.feature .icon {
   width: 40px;
 }
 
-.feature .icon i{
+.feature .icon i {
   font-size: 2.6em;
 }
 
-.feature .desc{
+.feature .desc {
   flex: 1;
   margin-left: 10px;
 }
 
-.feature .desc p{
+.feature .desc p {
   margin-top: 17px;
 }
 
-.feature .desc h4{
+.feature .desc h4 {
   margin-top: 8px;
 }
 
-.form-part{
+.form-part {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,29 +57,42 @@
   padding-left: 25px;
 }
 
-.form-part .row{
+.form-part .row {
   width: 100%;
   display: flex;
   position: relative;
   margin-top: 17px;
 }
 
-.form-part .row .mat-input-container{
+.form-part .row .mat-input-container {
   width: 100%;
 }
 
-.form-part .row i{
+.form-part .row i {
   margin-right: 13px;
   position: relative;
-  top: 8px;
+  top: 15px;
   color: #555;
 }
 
-.form-part .socials{
+.form-part .socials {
   margin-top: 40px;
   margin-bottom: 25px;
 }
 
-.form-part .row button{
+.form-part .row button {
   margin-top: 15px;
+}
+
+.form-part .row mat-form-field {
+  width: 100%;
+}
+
+.color-err {
+  color: #f44336;
+  font-size: x-small;
+}
+
+.invalid-feedback {
+  width: 100%;
 }

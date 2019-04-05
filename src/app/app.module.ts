@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { routes } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
+import { routes } from './app.routes';
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
+// components
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './dashboard/home/home.component';
@@ -22,13 +24,25 @@ import { SettingsComponent } from './dashboard/settings/settings.component';
 import { PriceTableComponent } from './dashboard/component/pricetable/pricetable.component';
 import { PanelsComponent } from './dashboard/component/panels/panels.component';
 import { WizardComponent } from './dashboard/component/wizard/wizard.component';
-import { SettingsService } from './services/settings.service';
-import { RentalService } from './dashboard/rental/rental.service';
+
+// modules
 import { RentalModule } from './dashboard/rental/rental.module';
+import { ManageModule } from './dashboard/manage/manage.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
+
+// services
 import { MapService } from './shared/map/map.service';
+import { HelperService } from './services/helper.service';
+import { SettingsService } from './services/settings.service';
+import { RentalService } from './dashboard/rental/rental.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { ManageService } from './dashboard/manage/manage.service';
+
+// interceptor
+import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
 
 @NgModule({
   declarations: [
@@ -62,13 +76,22 @@ import { MapService } from './shared/map/map.service';
     HttpClientModule,
     HttpModule,
     RentalModule,
+    ManageModule,
     SharedModule,
-    
   ],
   providers: [
     SettingsService,
     RentalService,
-    MapService
+    ManageService,
+    MapService,
+    HelperService,
+    AuthService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpConfigInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

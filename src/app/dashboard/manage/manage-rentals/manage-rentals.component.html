@@ -1,0 +1,63 @@
+<div class="container">
+    <app-navbar title="Manage Rentals"></app-navbar>
+
+    <section id="userRentals">
+
+        <mat-toolbar color="primary">
+            <span>My Rentals</span>
+            <span class="example-fill-remaining-space"></span>
+        </mat-toolbar>
+
+        <div class="row">
+
+            <ng-container *ngIf="rentals && rentals.length > 0">
+                <div *ngFor="let rental of rentals; let i = index" class="col-md-4">
+                    <div class="card text-center">
+
+                        <div class="card-block">
+                            <h4 class="card-title" style="margin-bottom: 15px;">{{rental.title}} -
+                                {{rental.city | ucwords}}</h4>
+
+                            <a class="btn btn-primary" [routerLink]="['/dashboard/rental/detail/', rental.id]">Go to
+                                Rental</a>
+
+                            <span *ngIf="rental.bookings.length > 0">
+                                <button class="btn btn-info" (click)="showPopup(rental.bookings)">Show Bookings</button>
+                            </span>
+
+                        </div>
+
+                        <div style="background-color: #e0e0e0;" class="card-footer text-muted">
+
+                            <p>Created at {{rental.createdAt | formatDate}}</p>
+
+                            <div class="btn-manage-action">
+                                <button (click)="rentalDeleteIndex = i" *ngIf="rentalDeleteIndex !== i" type="button"
+                                    class="btn btn-primary">Delete</button>
+
+                                <a class="btn btn-warning" (click)="goEditRental(rental.id)">Edit</a>
+                            </div>
+
+                            <div style="height: 50px;" *ngIf="rentalDeleteIndex === i">
+                                <p class="confirm-message">Do you confirm delete?</p>
+                                <button (click)="deleteRental(rental.id)" class="btn btn-success">Yes</button>
+                                <button (click)="rentalDeleteIndex = undefined" class="btn btn-danger">No</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </ng-container>
+
+            <div *ngIf="rentals && rentals.length === 0" class="col-md-8">
+                <div class="alert alert-warning">
+                    You dont have any rentals currenty created. If you want advertised your property
+                    please follow this link.
+                    <a class="btn btn-info" [routerLink]="['dashboard/rental/new']">Register Rental</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

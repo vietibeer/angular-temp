@@ -26,20 +26,30 @@ const userSchema = new Schema({
     rentals: [{
         type: Schema.Types.ObjectId,
         ref: 'Rental'
+    }],
+    bookings: [{
+        type: Schema.Types.ObjectId,
+        ref: "Booking"
     }]
 });
 
-userSchema.methods.isSamePassword = async function (passwordConfirm) {
+userSchema.virtual('id').get(function() {
+    return this._id.toHexString();
+});
+
+userSchema.set('toJSON', { virtuals: true });
+
+userSchema.methods.isSamePassword = async function(passwordConfirm) {
     const match = await bcrypt.compare(passwordConfirm, this.password);
     return match;
 }
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', function(next) {
 
     const user = this;
     const saltRounds = 10;
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(user.password, salt, function (err, hash) {
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(user.password, salt, function(err, hash) {
             user.password = hash;
             next();
         });

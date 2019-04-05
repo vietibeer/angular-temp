@@ -28,6 +28,10 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
         router.events.subscribe((event: any) => {
             if (event instanceof ChildActivationStart) {
 
+                if (event.snapshot.routeConfig === null) {
+                    return;
+                }
+
                 const parentPath = event.snapshot.routeConfig.path;
                 const childPath = event.snapshot.routeConfig.children;
 
@@ -45,7 +49,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
                     }
                 }
             }
-        })
+        });
     }
 
     ngOnInit() {
@@ -69,8 +73,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
     ngOnDestroy() {
-        this.settingsService.sidebarFilterUpdate.unsubscribe();
-        this.settingsService.sidebarColorUpdate.unsubscribe();
+        // this.settingsService.sidebarFilterUpdate.unsubscribe();
+        // this.settingsService.sidebarColorUpdate.unsubscribe();
     }
 
     ngAfterViewInit() {

@@ -1,0 +1,20 @@
+<app-navbar [title]="'Rental Search Result'"></app-navbar>
+
+<div class="row">
+    <div class="alert alert-info alert-with-icon">
+        <i class="material-icons alert-icon">notifications</i>
+        <button class="close" type="button" data-dismiss="alert" aria-label="Close"><i class="material-icons">close</i></button>
+        <h6 *ngIf="rentals.length > 0" class="page-title">Your Home in {{position | lowercase | ucwords}}</h6>
+        <h6 *ngIf="errors.length > 0" class="page-title">
+            <p *ngFor="let error of errors">
+                {{error.detail}}
+            </p>
+        </h6>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 10px">
+    <div class="col-md-4 col-sm-12 col-xs-12" *ngFor="let rental of rentals">
+        <app-imagecard [image]="rental.image" [title]="rental.title" [desc]="rental.desc" [footerTitle]="rental.footerTitle" [position]="rental.position" [id]="rental.id"></app-imagecard>
+    </div>
+</div>

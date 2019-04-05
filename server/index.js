@@ -7,6 +7,7 @@ const FakeDb = require('./fake-db');
 const bodyParser = require('body-parser');
 const rentalRouters = require('./routes/rental');
 const userRouters = require('./routes/user');
+const bookingRouters = require('./routes/booking');
 
 mongoose.connect(config.DB_URI, { useNewUrlParser: true }).then(() => {
     const fakedb = new FakeDb();
@@ -16,12 +17,13 @@ mongoose.connect(config.DB_URI, { useNewUrlParser: true }).then(() => {
 app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
 app.use('/api/v1/rentals', rentalRouters);
 app.use('/api/v1/user', userRouters);
+app.use('/api/v1/bookings', bookingRouters);
 
 app.listen(PORT, () => {
     console.log(`port ${PORT} running`);
@@ -29,3 +31,6 @@ app.listen(PORT, () => {
 
 // NOTE: Relationship 1-N
 // User can have multiple rentals. Rental can have just one User.
+
+//NOTE: Schema
+// Do not use arrow function with Schema
