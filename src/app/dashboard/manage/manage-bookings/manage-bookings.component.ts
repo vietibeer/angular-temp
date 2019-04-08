@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Booking } from 'app/models/booking';
 import { RentalService } from 'app/dashboard/rental/rental.service';
+import { PaymentService } from 'app/dashboard/payment/payment.service';
 
 @Component({
     selector: 'app-manage-bookings',
@@ -13,11 +14,13 @@ export class ManageBookingsComponent implements OnInit {
     payments: any[];
 
     constructor(
-        private rentalService: RentalService
+        private rentalService: RentalService,
+        private paymentService: PaymentService
     ) { }
 
     ngOnInit() {
         this.getUserBookings();
+        this.getPendingPayment();
     }
 
     /**
@@ -32,4 +35,39 @@ export class ManageBookingsComponent implements OnInit {
         });
     }
 
+    /**
+     * Function get Pending Booking
+     */
+    getPendingPayment() {
+        this.paymentService.getPendingPayment().subscribe((payments: any) => {
+            console.log(payments);
+            this.payments = payments;
+        }, () => {
+
+        });
+    }
+
+    /**
+     * Function accept payment
+     * @param payment
+     */
+    acceptPayment(payment) {
+        this.paymentService.acceptPayment(payment).subscribe(res => {
+            payment.status = 'paid';
+        }, err => {
+            console.error(err);
+        })
+    }
+
+    /**
+     * Function decline payment
+     * @param payment 
+     */
+    declinePayment(payment) {
+        this.paymentService.declinePayment(payment).subscribe(res => {
+            payment.status = 'declined';
+        }, err => {
+            console.error(err);
+        })
+    }
 }

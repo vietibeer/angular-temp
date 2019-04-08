@@ -40,6 +40,7 @@ import { RentalService } from './dashboard/rental/rental.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ManageService } from './dashboard/manage/manage.service';
+import { PaymentService } from './dashboard/payment/payment.service';
 
 // interceptor
 import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
@@ -87,10 +88,11 @@ import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
     HelperService,
     AuthService,
     AuthGuardService,
+    PaymentService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpConfigInterceptor,
-      multi: true
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]

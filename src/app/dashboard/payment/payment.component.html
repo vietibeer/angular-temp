@@ -1,0 +1,39 @@
+<div class="modal-header" mat-dialog-title>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="modal-title title">Credit or debit card</h4>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="close close-payment" aria-label="Close" (click)="close()">
+                <strong aria-hidden="true">&times;</strong>
+            </button>
+        </div>
+    </div>
+</div>
+
+<form [ngClass]="isValidatingCard ? 'loading' : ''">
+    <div class='group' mat-dialog-content>
+        <label>
+      <span>Card Number</span>
+      <div #cardNumber class='field'></div>
+    </label>
+        <label>
+      <span>Expiry Date</span>
+      <div #cardExpiry class='field'></div>
+    </label>
+        <label>
+      <span>CVC</span>
+      <div #cardCvc class='field'></div>
+    </label>
+    </div>
+    <div class='outcome' mat-dialog-content>
+        <div *ngIf='error' class='error'>
+            {{error}}
+        </div>
+        <div *ngIf="token" class='success alert alert-success'>
+            Card Accepted Successfully!
+        </div>
+    </div>
+
+    <button [disabled]="!isCardValid()" (click)="onSubmit()" type='button'>Submit, You will be not charged yet!</button>
+</form>

@@ -15,6 +15,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { MsgIconBtnComponent } from './msgiconbtn/msgiconbtn.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MapComponent } from './map/map.component';
+import { PaymentComponent } from 'app/dashboard/payment/payment.component';
 
 // modules
 import { NgPipesModule } from 'ngx-pipes';
@@ -54,6 +55,7 @@ import { FormatDatePipe } from 'app/pipes/format-date.pipe';
         MsgIconBtnComponent,
         NavbarComponent,
         MapComponent,
+        PaymentComponent,
         FormatDatePipe
     ],
     exports: [
@@ -66,6 +68,7 @@ import { FormatDatePipe } from 'app/pipes/format-date.pipe';
         MsgIconBtnComponent,
         NavbarComponent,
         MapComponent,
+        PaymentComponent,
 
         // module
         CommonModule,

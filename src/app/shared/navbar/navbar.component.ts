@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
     @Input() title: string;
     search: string = '';
     constructor(
-        private authS: AuthService,
+        public authS: AuthService,
         private router: Router
     ) { }
 

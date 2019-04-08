@@ -9,10 +9,12 @@ const bookingSchema = new Schema({
     days: { type: Number },
     rental: { type: Schema.Types.ObjectId, ref: "Rental" },
     user: { type: Schema.Types.ObjectId, ref: "User" },
+    payment: { type: Schema.Types.ObjectId, ref: 'Payment' },
+    status: { type: String, default: 'pending' },
     createdAt: { type: Date, default: Date.now },
 });
 
-bookingSchema.virtual('id').get(function () {
+bookingSchema.virtual('id').get(function() {
     return this._id.toHexString();
 });
 

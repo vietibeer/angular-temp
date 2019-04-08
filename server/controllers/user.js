@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const { handleError } = require('./common');
 const jwt = require('jsonwebtoken');
-const config = require('../config/dev');
+const config = require('../config');
 
 /**
  * Function user login
