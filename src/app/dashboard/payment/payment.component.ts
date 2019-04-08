@@ -96,7 +96,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
      * Function close popup
      * @param data 
      */
-    close(data) {
+    close(data = null) {
         this.dialogRef.close(data);
     }
 
