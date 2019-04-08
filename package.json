@@ -14,7 +14,7 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "serve": "ng serve --open",
-        "heroky-postbuild": "npm run build"
+        "heroku-postbuild": "npm run build"
     },
     "private": true,
     "dependencies": {
