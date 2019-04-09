@@ -26,7 +26,7 @@ export class RentalBookingComponent implements OnInit {
     options: any = {};
     errors: any[] = [];
     constructor(
-        private auth: AuthService,
+        public auth: AuthService,
         private helpS: HelperService,
         private rentalS: RentalService,
         private dialog: MatDialog

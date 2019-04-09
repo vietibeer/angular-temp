@@ -2,7 +2,7 @@ const { handleError } = require('./common');
 const Payment = require('../models/payment');
 const Booking = require('../models/booking');
 const User = require('../models/user');
-const config = require('../config/dev');
+const config = require('../config');
 const stripe = require('stripe')(config.STRIPE_SK);
 /**
  * Function get pending payment

@@ -7,7 +7,7 @@ const Payment = require('../models/payment');
 const { handleError } = require('./common');
 const moment = require('moment');
 
-const config = require('../config/dev');
+const config = require('../config');
 const stripe = require('stripe')(config.STRIPE_SK);
 
 const CUSTOMER_SHARE = 0.8;
