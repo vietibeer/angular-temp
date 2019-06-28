@@ -14,7 +14,7 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "serve": "ng serve --open",
-        "heroku-postbuild": "npm run build"
+        "heroku-postbuild": "node patch.js"
     },
     "private": true,
     "dependencies": {
