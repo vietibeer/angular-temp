@@ -77,7 +77,7 @@ const declinePayment = (req, res) => {
     Booking.deleteOne({ id: booking._id }, (err, deletedBooking) => {
 
         if (err) {
-            return res.status(422).send({ errors: normalizeErrors(err.errors) });
+            return res.status(422).send({ errors: handleError(err.errors) });
         }
 
         Payment.update({ _id: payment._id }, { status: 'declined' }, function() {});
